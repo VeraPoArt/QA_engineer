@@ -1,5 +1,5 @@
 ![logo (1)](https://github.com/VeraPoArt/QA-engineer-Yandex.Practicum/blob/89847114dde317aae01a837e1a460616f0fe8d65/project%2001/76625237635527.5746e93adbb1b.jpg)
-![logo (2)](https://github.com/VeraPoArt/QA-engineer-Yandex.Practicum/blob/5edf9420388febe9acfd9b6bd883eda686fd2060/project%2001/stack.jpg)
+![logo (2)](https://github.com/VeraPoArt/QA_engineer/blob/main/%D1%80%D0%B5%D0%B7%D1%8E%D0%BC%D0%B5%20%D1%8D%D1%81%D1%82%D0%B5%D0%BB%D0%B8%D0%BD%D0%BA%203-02.jpg)
 # QA engineer
 
 ### ООО «Эстелинк»   QA Junior +
