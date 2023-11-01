@@ -1,0 +1,1936 @@
+{
+	"info": {
+		"_postman_id": "7dc403ac-cd0c-4557-89e3-e308cfc8c9e8",
+		"name": "enter_group",
+		"description": "[https://entry-group-dev.devselink.ru/docs#/Auth/AuthController_login](https://entry-group-dev.devselink.ru/docs#/Auth/AuthController_login)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27215714"
+	},
+	"item": [
+		{
+			"name": "Franchises",
+			"item": [
+				{
+					"name": "Создание франшизы",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Обработка ответа\r",
+									"const responseJson = pm.response.json();\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Сохранение franchiseId\r",
+									"if (responseJson.franchise && responseJson.franchise.id) {\r",
+									"    const franchiseId = responseJson.franchise.id;\r",
+									"    pm.environment.set(\"franchiseId\", franchiseId);\r",
+									"    pm.test(\"Идентификатор франшизы успешно сохранен\", function() {\r",
+									"        pm.expect(franchiseId).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Идентификатор франшизы не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.franchise && responseJson.franchise.id).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Сохранение networkId\r",
+									"if (responseJson.network && responseJson.network.id) {\r",
+									"    const networkId = responseJson.network.id;\r",
+									"    pm.environment.set(\"networkId\", networkId);\r",
+									"    pm.test(\"Идентификатор сети успешно сохранен\", function() {\r",
+									"        pm.expect(networkId).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Идентификатор сети не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.network && responseJson.network.id).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Сохранение companyId\r",
+									"if (responseJson.company && responseJson.company.id) {\r",
+									"    const companyId = responseJson.company.id;\r",
+									"    pm.environment.set(\"companyId\", companyId);\r",
+									"    pm.test(\"Идентификатор компании успешно сохранен\", function() {\r",
+									"        pm.expect(companyId).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Идентификатор компании не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.company && responseJson.company.id).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Обработка тела запроса\r",
+									"const requestBody = JSON.parse(request.data);\r",
+									"\r",
+									"// Сохранение email\r",
+									"if (requestBody.user && requestBody.user.email) {\r",
+									"    const email = requestBody.user.email;\r",
+									"    pm.environment.set(\"email\", email);\r",
+									"    pm.test(\"Email успешно сохранен\", function() {\r",
+									"        pm.expect(email).to.eql(email);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Email не найден в запросе\", function() {\r",
+									"        pm.expect(false).to.be.true;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Сохранение password\r",
+									"if (requestBody.user && requestBody.user.password) {\r",
+									"    const password = requestBody.user.password;\r",
+									"    pm.environment.set(\"password\", password);\r",
+									"    pm.test(\"Password успешно сохранен\", function() {\r",
+									"        pm.expect(password).to.eql(password);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Password не найден в запросе\", function() {\r",
+									"        pm.expect(false).to.be.true;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Сохранение phone\r",
+									"if (requestBody.user && requestBody.user.phone) {\r",
+									"    const phone = requestBody.user.phone;\r",
+									"    pm.environment.set(\"phone\", phone);\r",
+									"    pm.test(\"Phone успешно сохранен\", function() {\r",
+									"        pm.expect(phone).to.eql(phone);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Phone не найден в запросе\", function() {\r",
+									"        pm.expect(false).to.be.true;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"\r",
+									"// Сохранение first_name\r",
+									"if (requestBody.user && requestBody.user.first_name) {\r",
+									"    const first_name = requestBody.user.first_name;\r",
+									"    pm.environment.set(\"first_name\", first_name);\r",
+									"    pm.test(\"First_name успешно сохранен\", function() {\r",
+									"        pm.expect(first_name).to.eql(first_name);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"First_name не найден в запросе\", function() {\r",
+									"        pm.expect(false).to.be.true;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"// Сохранение last_name\r",
+									"if (requestBody.user && requestBody.user.last_name) {\r",
+									"    const last_name = requestBody.user.last_name;\r",
+									"    pm.environment.set(\"last_name\", last_name);\r",
+									"    pm.test(\"Last_name успешно сохранен\", function() {\r",
+									"        pm.expect(last_name).to.eql(last_name);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Last_name не найден в запросе\", function() {\r",
+									"        pm.expect(false).to.be.true;\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "id",
+								"value": "{{franchiseId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"franchise\": {\r\n    \"name\": \"FranchiseTEST060\",\r\n    \"business\": {\r\n      \"type_id\": \"type_id\",\r\n      \"sub_type_id\": \"subtype_id\",\r\n      \"location\": {\r\n        \"address\": \"adress\",\r\n        \"country\": \"country\",\r\n        \"street\": \"street\",\r\n        \"city\": \"city\",\r\n        \"office\": \"office\",\r\n        \"time\": \"time\",\r\n        \"coordinate\": {\r\n          \"lat\": 228,\r\n          \"lon\": 1337\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"user\": {\r\n    \"email\": \"test060@mail.ru\",\r\n    \"phone\": \"71112223360\",\r\n    \"first_name\": \"Vera_test\",\r\n    \"last_name\": \"Po\",\r\n    \"password\": \"123Qwerty\",\r\n    \"theme\": \"white\",\r\n    \"position_id\": \"some-uuid\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/franchises/create",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"franchises",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение access и refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if (responseJson.auth_data && responseJson.auth_data.access_token) {\r",
+									"    const accessToken = responseJson.auth_data.access_token;\r",
+									"    pm.environment.set(\"access_token\", accessToken);\r",
+									"    \r",
+									"    pm.test(\"Access token успешно сохранен\", function() {\r",
+									"        pm.expect(accessToken).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Access token не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.auth_data && responseJson.auth_data.access_token).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"if (responseJson.auth_data && responseJson.auth_data.refresh_token) {\r",
+									"    const refreshToken = responseJson.auth_data.refresh_token;\r",
+									"    pm.environment.set(\"refresh_token\", refreshToken);\r",
+									"    \r",
+									"    pm.test(\"Refresh token успешно сохранен\", function() {\r",
+									"        pm.expect(refreshToken).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Refresh token не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.auth_data && responseJson.auth_data.refresh_token).to.exist;\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"credentials\": \"{{email}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/login",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка франшиз",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Список франшиз получен\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/franchises/list",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"franchises",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверка ID созданной франшизы",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"const savedFranchiseId = pm.environment.get(\"franchiseId\");\r",
+									"\r",
+									"if (responseJson.id) {\r",
+									"    const currentId = responseJson.id;\r",
+									"    \r",
+									"    if (currentId === savedFranchiseId) {\r",
+									"        pm.test(\"Идентификаторы совпадают\", function() {\r",
+									"            pm.expect(currentId).to.equal(savedFranchiseId);\r",
+									"        });\r",
+									"    } else {\r",
+									"        pm.test(\"Идентификаторы не совпадают\", function() {\r",
+									"            pm.expect(currentId).to.not.equal(savedFranchiseId);\r",
+									"        });\r",
+									"    }\r",
+									"} else {\r",
+									"    pm.test(\"Идентификаторы не найдены\", function() {\r",
+									"        pm.expect(responseJson.id).to.exist;\r",
+									"    });\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "{{franchiseId}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/franchises/{{franchiseId}}/one",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"franchises",
+								"{{franchiseId}}",
+								"one"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "При создании франшизы, как первого этапа по флоу \"Авторизация нового пользователя\", необходимо внести уникальные данные в следующие графы в RequestBody:\n\n{  \n\"franchise\": {  \n**\"name\": \"FranchiseTEST025\",** _**#изменить номер франшизы на следующий по порядку**_  \n\"business\": {  \n\"type_id\": \"type_id\",  \n\"sub_type_id\": \"subtype_id\",  \n\"location\": {  \n\"address\": \"adress\",  \n\"country\": \"country\",  \n\"street\": \"street\",  \n\"city\": \"city\",  \n\"office\": \"office\",  \n\"time\": \"time\",  \n\"coordinate\": {  \n\"lat\": 228,  \n\"lon\": 1337  \n}  \n}  \n}  \n},  \n\"user\": {  \n**\"email\": \"**[<b>test014@mail.ru</b>](https://mailto:test014@mail.ru)**\",** _**#изменить номер test email на следующий по порядку**_  \n**\"phone\": \"+79120000310\",** _**#изменить номер phone на любое валидное значение**_  \n\"first_name\": \"Vera_test\",  \n\"last_name\": \"Po\",  \n\"password\": \"Password123\",  \n\"theme\": \"white\",  \n\"position_id\": \"some-uuid\"  \n}  \n}"
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "Авторизация",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"// Генерируем уникальную переменную, добавляя текущее время для уникальности\r",
+									"const userId = pm.response.json().user_data.id;\r",
+									"const uniqueUserId = userId;\r",
+									"\r",
+									"// Сохраняем уникальную переменную в глобальной области видимости для дальнейшего использования\r",
+									"postman.setGlobalVariable(\"uniqueUserId\", uniqueUserId);\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"if (responseJson.auth_data && responseJson.auth_data.access_token) {\r",
+									"    const accessToken = responseJson.auth_data.access_token;\r",
+									"    pm.environment.set(\"access_token\", accessToken);\r",
+									"    \r",
+									"    pm.test(\"Access token успешно сохранен\", function() {\r",
+									"        pm.expect(accessToken).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Access token не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.auth_data && responseJson.auth_data.access_token).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"if (responseJson.auth_data && responseJson.auth_data.refresh_token) {\r",
+									"    const refreshToken = responseJson.auth_data.refresh_token;\r",
+									"    pm.environment.set(\"refresh_token\", refreshToken);\r",
+									"    \r",
+									"    pm.test(\"Refresh token успешно сохранен\", function() {\r",
+									"        pm.expect(refreshToken).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Refresh token не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.auth_data && responseJson.auth_data.refresh_token).to.exist;\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "email",
+								"value": "{{email}}",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "{{password}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"credentials\": \"{{email}}\",\r\n  \"password\": \"{{password}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/login",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Информация о компаниях в рамках сети",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": \"{{networkId}}\",\r\n    \"name\": \"string\"\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{networkId}}/list",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{networkId}}",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Посмотреть информацию об указанной компании",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/one",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"one"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить приглашеных сотрудников в компанию",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/employees",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить приглашенных клиентов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/clients",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание новой компании внутри сети",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"companytest055_end5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{networkId}}/create",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{networkId}}",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Приглашение клиента в компанию",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"// Парсим тело ответа\r",
+									"const currentResponseBody = pm.response.json();\r",
+									"\r",
+									"// Извлекаем id\r",
+									"const currentId = currentResponseBody.id;\r",
+									"\r",
+									"// Сохраняем id в переменной Idclients\r",
+									"pm.variables.set(\"Idclients\", currentId);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Генерация случайной строки\r",
+									"function randomString(length, chars) {\r",
+									"    let result = '';\r",
+									"    for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"// Случайное имя пользователя\r",
+									"const randomUser = randomString(8, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Случайный домен\r",
+									"const randomDomain = randomString(5, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Случайный TLD (Top-Level Domain)\r",
+									"const randomTLD = randomString(3, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Собираем e-mail\r",
+									"const randomEmail = `${randomUser}@${randomDomain}.${randomTLD}`;\r",
+									"\r",
+									"// Устанавливаем переменную для использования в теле запроса\r",
+									"pm.variables.set(\"randomEmail\", randomEmail);\r",
+									"\r",
+									"\r",
+									"// Генерация случайного числа в заданном диапазоне\r",
+									"function getRandomInt(min, max) {\r",
+									"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+									"}\r",
+									"\r",
+									"// Генерация последних 7 цифр номера телефона\r",
+									"let lastSevenDigits = '';\r",
+									"for (let i = 0; i < 7; i++) {\r",
+									"    lastSevenDigits += getRandomInt(0, 9);\r",
+									"}\r",
+									"\r",
+									"// Формирование полного номера телефона\r",
+									"const randomPhone = '+7992' + lastSevenDigits;\r",
+									"\r",
+									"// Сохранение сгенерированного номера в переменной\r",
+									"pm.variables.set(\"randomPhone\", randomPhone);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{randomEmail}}\",\r\n  \"first_name\": \"Test\",\r\n  \"last_name\": \"TEST\",\r\n  \"phone\": \"{{randomPhone}}\",\r\n  \"sex\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/invite/clients",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"invite",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Отправка приглашения сотрудникам для присоединения к определенной компании в системе",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"// Парсим тело ответа\r",
+									"const currentResponseBody = pm.response.json();\r",
+									"\r",
+									"// Извлекаем id\r",
+									"const currentId = currentResponseBody.id;\r",
+									"\r",
+									"// Сохраняем id в переменной Idclients\r",
+									"pm.variables.set(\"Idemployees\", currentId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Генерация случайной строки\r",
+									"function randomString(length, chars) {\r",
+									"    let result = '';\r",
+									"    for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"// Случайное имя пользователя\r",
+									"const randomUser = randomString(8, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Случайный домен\r",
+									"const randomDomain = randomString(5, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Случайный TLD (Top-Level Domain)\r",
+									"const randomTLD = randomString(3, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Собираем e-mail\r",
+									"const randomEmail = `${randomUser}@${randomDomain}.${randomTLD}`;\r",
+									"\r",
+									"// Устанавливаем переменную для использования в теле запроса\r",
+									"pm.variables.set(\"randomEmail\", randomEmail);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{randomEmail}}\",\r\n  \"position_id\": \"some-uuid\",\r\n  \"role_id\": \"some-uuid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/invite/employees",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"invite",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление приглашенного клиента в компанию",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"{{Idclients}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/erise/clients",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"erise",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление сотрудников из компании",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"{{Idemployees}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/companies/{{companyId}}/erise/employees",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"companies",
+								"{{companyId}}",
+								"erise",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networks",
+			"item": [
+				{
+					"name": "Получить список сетей в франшизе",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/networks/{{franchiseId}}/list",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"networks",
+								"{{franchiseId}}",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получения информации о конкретной сети",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/networks/{{networkId}}/one",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"networks",
+								"{{networkId}}",
+								"one"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание сети во франшизе",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{franchiseId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/networks/{{franchiseId}}/create",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"networks",
+								"{{franchiseId}}",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Локация",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/locations/{{companyId}}/by-company",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"locations",
+								"{{companyId}}",
+								"by-company"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Проверка доступа к группе с указанным UUID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"groupUUID\": \"{{franchiseId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/check",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить токен",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"if (responseJson.auth_data && responseJson.auth_data.access_token) {\r",
+									"    const accessToken = responseJson.auth_data.access_token;\r",
+									"    pm.environment.set(\"access_token\", accessToken);\r",
+									"    \r",
+									"    pm.test(\"Access token успешно сохранен\", function() {\r",
+									"        pm.expect(accessToken).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Access token не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.auth_data && responseJson.auth_data.access_token).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"if (responseJson.auth_data && responseJson.auth_data.refresh_token) {\r",
+									"    const refreshToken = responseJson.auth_data.refresh_token;\r",
+									"    pm.environment.set(\"refresh_token\", refreshToken);\r",
+									"    \r",
+									"    pm.test(\"Refresh token успешно сохранен\", function() {\r",
+									"        pm.expect(refreshToken).to.be.a('string');\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"Refresh token не найден в ответе\", function() {\r",
+									"        pm.expect(responseJson.auth_data && responseJson.auth_data.refresh_token).to.exist;\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"{{refresh_token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/refresh",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Дорегистрация приглашенного пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Генерация случайной строки\r",
+									"function randomString(length, chars) {\r",
+									"    let result = '';\r",
+									"    for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"// Случайное имя пользователя\r",
+									"const randomUser = randomString(8, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Случайный домен\r",
+									"const randomDomain = randomString(5, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Случайный TLD (Top-Level Domain)\r",
+									"const randomTLD = randomString(3, 'abcdefghijklmnopqrstuvwxyz');\r",
+									"\r",
+									"// Собираем e-mail\r",
+									"const randomEmail = `${randomUser}@${randomDomain}.${randomTLD}`;\r",
+									"\r",
+									"// Устанавливаем переменную для использования в теле запроса\r",
+									"pm.variables.set(\"randomEmail\", randomEmail);\r",
+									"\r",
+									"\r",
+									"// Генерация случайного числа в заданном диапазоне\r",
+									"function getRandomInt(min, max) {\r",
+									"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+									"}\r",
+									"\r",
+									"// Генерация последних 7 цифр номера телефона\r",
+									"let lastSevenDigits = '';\r",
+									"for (let i = 0; i < 7; i++) {\r",
+									"    lastSevenDigits += getRandomInt(0, 9);\r",
+									"}\r",
+									"\r",
+									"// Формирование полного номера телефона\r",
+									"const randomPhone = '+7992' + lastSevenDigits;\r",
+									"\r",
+									"// Сохранение сгенерированного номера в переменной\r",
+									"pm.variables.set(\"randomPhone\", randomPhone);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{randomEmail}}\",\r\n  \"phone\": \"{{randomPhone}}\",\r\n  \"first_name\": \"Test\",\r\n  \"last_name\": \"TEST\",\r\n  \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/registration",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение пароля пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"current_password\": \"{{password}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/update/password",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"update",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение телефона пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"+79999999999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/update/phone",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"update",
+								"phone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение email пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/update/email",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"update",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перевод аккаунта пользователя в \"подтвержденный\" статус",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/auth/confirm-personal",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"auth",
+								"confirm-personal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Данные о юзере",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev.devselink.ru}}/users/{{uniqueUserId}}/one",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"users",
+								"{{uniqueUserId}}",
+								"one"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cписок доступных филиалов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/users/{{uniqueUserId}}/groups",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"users",
+								"{{uniqueUserId}}",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Франшизы, доступные юзеру",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/users/{{franchiseId}}/list",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"users",
+								"{{franchiseId}}",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Сети, доступные юзеру",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/users/{{networkId}}/list",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"users",
+								"{{networkId}}",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Компании, доступные юзеру",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dev.devselink.ru}}/users/{{companyId}}/list",
+							"host": [
+								"{{dev.devselink.ru}}"
+							],
+							"path": [
+								"users",
+								"{{companyId}}",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Удаление созданной франшизы",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{dev.devselink.ru}}/franchises/{{franchiseId}}/delete",
+					"host": [
+						"{{dev.devselink.ru}}"
+					],
+					"path": [
+						"franchises",
+						"{{franchiseId}}",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
